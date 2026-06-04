@@ -6,7 +6,7 @@ git clone https://github.com/i2b2/i2b2-etl.git
 git clone https://github.com/i2b2/i2b2-cdi-qs-mozilla.git
 
 ## Copy Mozilla folder inside i2b2-etl repo
-cp -r  mozilla-i2b2-etl/Mozilla/  i2b2-etl/
+cp -r  i2b2-cdi-qs-mozilla/Mozilla/  i2b2-etl/
 
 cd i2b2-etl
 
