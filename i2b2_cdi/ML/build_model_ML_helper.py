@@ -14,7 +14,8 @@ from sklearn.linear_model import LogisticRegression
 from  sklearn.model_selection import train_test_split
 from pathlib import Path
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score,roc_auc_score
-from i2b2_cdi.ML.mlHelper import compute_classification_metrics,serialize_model_to_base64, clean_json_string, convert_numpy_types, get_tuple_from_df, format_data_paths,get_installed_packages, get_top_n_features, save_tuple,load_tuple
+from i2b2_cdi.ML.mlHelper import compute_classification_metrics,serialize_model_to_base64, clean_json_string, convert_numpy_types, get_tuple_from_df, format_data_paths, get_top_n_features, save_tuple,load_tuple
+# from i2b2_cdi.ML.mlHelper import compute_classification_metrics,serialize_model_to_base64, clean_json_string, convert_numpy_types, get_tuple_from_df, format_data_paths,get_installed_packages, get_top_n_features, save_tuple,load_tuple
 from i2b2_cdi.utils.patient_set import get_patient_set_instance_id
 
 
@@ -171,7 +172,7 @@ def get_facts_from_buffer_cutoff(cursor,params):
 def create_data_label_codes(cursor,params):
     from psycopg2 import sql
     where_clause = " OR ".join(
-        ["concept_path LIKE '{}'".format(x) for x in params['label_paths']]
+        ["concept_path ILIKE '{}'".format(x) for x in params['label_paths']]
     )
     _codes_label_sql = (
         "CREATE TEMP TABLE codes_label AS "
@@ -184,7 +185,7 @@ def create_data_label_codes(cursor,params):
     exec_and_count_rows(cursor, None, codes_label_sql, 'codes_label')
 
     where_clause1 = " OR ".join(
-        ["concept_path LIKE '{}'".format(x) for x in params['data_paths']])
+        ["concept_path ILIKE '{}'".format(x) for x in params['data_paths']])
     where_clause2 = " concept_cd NOT IN (SELECT concept_cd FROM codes_label) "
 
     _codes_data_sql = (
@@ -425,6 +426,15 @@ def get_concept_blob(concept_cd):
     logger.trace("Concept Blob: {}", blob)
     blob = json.loads(blob,  strict=False)
     return blob 
+
+from importlib.metadata import distributions
+
+def get_installed_packages():
+    return {
+        dist.metadata["Name"]: dist.version
+        for dist in distributions()
+        if dist.metadata.get("Name")
+    }
 
 def save_model_in_concept_blob(ml_code,params,metrics,selected_features,prediction_pipeline):
     dict={}

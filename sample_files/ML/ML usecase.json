@@ -17,7 +17,7 @@ Create Patient-ML concept  Payload
       "label_paths":[
          "diabetes/label"
       ],
-      "data_period_start":"1992-02-02",
+      "data_period_start":"1960-02-02",
       "data_period_end":"2024-08-20"
    }
  }
@@ -32,12 +32,12 @@ Job - Apply Model
    "input": {
       "path": "/ML/Diagnosis/DM2",
       "target_patient_set": [
-         "target_dm3"
+         "target_dm2"
       ],
       "prediction_event_paths": [
          "Diabetes/label/target"
       ],
-      "data_period_start": "1992-02-02",
+      "data_period_start": "1960-02-02",
       "data_period_end": "2024-08-20"
    },
    "jobType": "ml"

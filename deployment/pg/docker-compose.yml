@@ -14,7 +14,7 @@ services:
       - i2b2-net
 
   i2b2-etl:
-        image: i2b2/i2b2-etl:${I2B2_ETL_TAG}
+        image: i2b2-etl:local_1706 #i2b2/i2b2-etl:${I2B2_ETL_TAG}
         #image: i2b2/i2b2-etl:local-v1
         container_name: i2b2-etl
         #restart: unless-stopped
@@ -67,7 +67,7 @@ services:
         volumes:
             - ./importdata:/usr/src/app/importdata
             - ../../i2b2_cdi:/usr/src/app/i2b2_cdi
-            - ../../Mozilla:/usr/src/app/Mozilla
+            # - ../../Mozilla:/usr/src/app/Mozilla
             - /tmp/etl:/tmp/etl
             - /tmp/jupyter:/root/.local/share/jupyter/runtime
         ports:
