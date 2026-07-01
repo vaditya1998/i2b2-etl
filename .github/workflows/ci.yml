@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run script
-        run: timeout 160 sh create.sh || [ $? -eq 124 ]
+        run: timeout 160 sh i2b2_ml_demo_test.sh || [ $? -eq 124 ]
