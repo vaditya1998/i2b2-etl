@@ -123,9 +123,6 @@ def apply_build_model(conceptPath,ml_code,crc_ds,job_id,blob=None, concept_blob=
     data_paths = [format_data_paths(path) for path in data_paths]
     label_paths = [format_data_paths(path) for path in label_paths]
 
-    print("data_paths=", data_paths)
-    print("label_paths=", label_paths)
-
     pos_result_instance_id=get_patient_set_instance_id(positive_ps)
     neg_result_instance_id=get_patient_set_instance_id(negative_ps)
 
