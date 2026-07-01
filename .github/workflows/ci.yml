@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run script
-        run: sh i2b2_ml_demo_test.sh
+        run: timeout 160s sh i2b2_ml_demo_test.sh
